@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - PK Verse</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gradient-bg">
+  <div class="fade-in container">
+    <h2>Login with Official Email</h2>
+    <input type="email" id="email" placeholder="example@college.edu.np" />
+    <button class="btn" onclick="validateEmail()">Continue</button>
+  </div>
+
+  <script>
+    function validateEmail() {
+      const email = document.getElementById('email').value;
+      if (email.endsWith('@college.edu.np')) {
+        window.location.href = 'department.html';
+      } else {
+        alert('Use your official institutional email');
+      }
+    }
+  </script>
+</body>
+</html>
