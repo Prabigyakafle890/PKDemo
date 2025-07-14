@@ -1,0 +1,200 @@
+/* RESET + BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
+  background-color: #f5f7fa;
+  color: #1a1a1a;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  animation: fadeInBody 0.8s ease-in;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px 40px;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.logo span {
+  color: #2b6cb0;
+}
+
+.navbar nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar nav a:hover {
+  color: #2b6cb0;
+}
+
+/* HERO SECTION */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px 80px;
+  background-color: #f5f7fa;
+}
+
+.hero-content {
+  max-width: 700px;
+  animation: slideUp 1s ease-out;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-content .emphasis {
+  color: #2b6cb0;
+}
+
+.subtext {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* BUTTONS */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn.primary {
+  background-color: #2b6cb0;
+  color: white;
+  border: none;
+}
+
+.btn.primary:hover {
+  background-color: #234e8a;
+  transform: scale(1.05);
+}
+
+.btn.secondary {
+  background-color: #e2e8f0;
+  color: #1a202c;
+  border: 1px solid #cbd5e0;
+}
+
+.btn.secondary:hover {
+  background-color: #cbd5e0;
+  transform: scale(1.05);
+}
+
+/* INFO SECTIONS: About & Contact */
+.info-section {
+  padding: 80px 20px;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.section-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-content h2 {
+  font-size: 2rem;
+  color: #2b6cb0;
+  margin-bottom: 20px;
+}
+
+.section-content p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInBody {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .navbar nav {
+    margin-top: 10px;
+  }
+
+  .navbar nav a {
+    display: block;
+    margin: 10px 0 0 0;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PKonnect Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f9f9f9;
+    }
+    #chat-box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      height: 300px;
+      overflow-y: auto;
+      background-color: #fff;
+      margin-bottom: 10px;
+    }
+    .message {
+      margin: 8px 0;
+    }
+    input[type="text"] {
+      width: 75%;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="login()">Login with Email</button>
+  <h2>PKonnect Chat</h2>
+  
+  <div id="chat-box"></div>
+
+  <input type="text" id="msg" placeholder="Type your message..." />
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+    async function login() {
+      const email = prompt("Enter your institutional email:");
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      alert("Logged in as: " + data.user_type);
+    }
+
+    async function sendMessage() {
+      const msgInput = document.getElementById("msg");
+      const chatBox = document.getElementById("chat-box");
+      const message = msgInput.value.trim();
+
+      if (!message) return;
+
+      // Show user message
+      chatBox.innerHTML += `<div class="message"><strong>You:</strong> ${message}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+      msgInput.value = "";
+
+      try {
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+        chatBox.innerHTML += `<div class="message"><strong>Bot:</strong> ${data.response}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      } catch (err) {
+        chatBox.innerHTML += `<div class="message"><strong>Error:</strong> Couldn't reach server.</div>`;
+      }
+    }
+  </script>
+
+</body>
+</html>

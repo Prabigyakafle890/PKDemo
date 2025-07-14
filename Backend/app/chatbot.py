@@ -1,19 +1,10 @@
-def generate_response(message, user_type, department=None):
-    message = message.lower()
+from app.intent_matcher import detect_intent, is_allowed
+from models.gemma_loader import generate_gemma_response
 
-    if user_type == 'student':
-        if 'routine' in message:
-            return f"{department} class routine will be updated soon."
-        elif 'exam' in message:
-            return "Exams are scheduled for next month."
-        else:
-            return "Hello student! You can ask about routine, exams, or results."
+def get_response(user_input, user_type):
+    intent = detect_intent(user_input)
 
-    elif user_type == 'general':
-        if 'admission' in message:
-            return "Admissions are open! Visit our website or contact the front desk."
-        else:
-            return "Hi there! I can help with general college queries like admission or contact info."
+    if not is_allowed(intent, user_type):
+        return "This information is restricted to institutional users."
 
-    else:
-        return "Sorry, I didn't understand that. Can you rephrase?"
+    return generate_gemma_response(user_input)
