@@ -1,12 +1,10 @@
 from flask import Flask
-from flask_cors import CORS
-from app.routes import chatbot_routes
 
 def create_app():
-    app = Flask(__name__)
-    CORS(app)  # Enable cross-origin requests (important for frontend)
+    app = Flask(__name__, template_folder="../templates")
+    app.secret_key = 'your-secret-key'  # required for session to work
 
-    # Register routes
-    app.register_blueprint(chatbot_routes)
+    from app.routes import chatbot_bp  # ✅ import from routes.py
+    app.register_blueprint(chatbot_bp)
 
     return app

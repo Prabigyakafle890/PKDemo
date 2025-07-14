@@ -1,14 +1,25 @@
-from flask import Blueprint, request, jsonify
-from app.chatbot import generate_response
+from flask import Blueprint, request, jsonify, session, render_template
+from app.chatbot import get_response
+from app.auth import check_user_type
 
-chatbot_routes = Blueprint('chatbot_routes', __name__)
+chatbot_bp = Blueprint('chatbot_bp', __name__)
 
-@chatbot_routes.route('/chat', methods=['POST'])
+@chatbot_bp.route('/')
+def index():
+    return render_template("chatbot.html")
+
+@chatbot_bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get("email", "")
+    user_type = check_user_type(email)
+    session["user_type"] = user_type
+    return jsonify({"status": "success", "user_type": user_type})
+
+@chatbot_bp.route('/chat', methods=['POST'])
 def chat():
     data = request.get_json()
-    user_msg = data.get('message', '')
-    user_type = data.get('user_type', 'general')  # "student" or "general"
-    department = data.get('department', None)
-
-    reply = generate_response(user_msg, user_type, department)
-    return jsonify({"reply": reply})
+    user_input = data.get("message", "")
+    user_type = session.get("user_type", "guest")
+    response = get_response(user_input, user_type)
+    return jsonify({"response": response})
