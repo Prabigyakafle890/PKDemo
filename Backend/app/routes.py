@@ -4,6 +4,7 @@ from app.auth import check_user_type
 
 chatbot_bp = Blueprint('chatbot_bp', __name__)
 
+<<<<<<< HEAD
 @chatbot_bp.route("/")
 def index():
     return render_template("index.html")  # ✅ load index.html from templates
@@ -15,6 +16,11 @@ def guest():
 @chatbot_bp.route("/chatbot")
 def chatbot():
     return render_template("chatbot.html")  # ✅ load chatbot.html
+=======
+@chatbot_bp.route('/')
+def index():
+    return render_template("chatbot.html")
+>>>>>>> d970e6d7db84c93091c5fc4422157941eae9f541
 
 @chatbot_bp.route('/login', methods=['POST'])
 def login():
