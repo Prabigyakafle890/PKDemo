@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guest Access - PK Verse</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/guest.css') }}">
+
+</head>
+<body class="plain-bg">
+  <div class="fade-in container">
+    <h2>Hello, Guest 👋</h2>
+    <p>Choose how you'd like to proceed</p>
+    <div class="button-group">
+      <a href="{{ url_for('chatbot_bp.chatbot') }}" class="btn">Sign In with Gmail</a>
+      <a href="{{ url_for('chatbot_bp.chatbot') }}" class="btn">Sign Up</a>
+      <a href="{{ url_for('chatbot_bp.chatbot') }}" class="btn">Continue without Login</a>
+    </div>
+  </div>
+</body>
+</html>

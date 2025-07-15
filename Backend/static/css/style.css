@@ -12,7 +12,6 @@ html, body {
   color: #1a1a1a;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  animation: fadeInBody 0.8s ease-in;
 }
 
 /* NAVBAR */
@@ -50,13 +49,14 @@ html, body {
   color: #2b6cb0;
 }
 
-/* HERO SECTION */
+/* HERO SECTION: Full Height */
 .hero-section {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 100px 20px 80px;
+  min-height: 100vh; /* Full screen */
+  padding: 60px 20px;
   background-color: #f5f7fa;
 }
 
@@ -66,7 +66,7 @@ html, body {
 }
 
 .hero-content h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -148,15 +148,6 @@ html, body {
 }
 
 /* ANIMATIONS */
-@keyframes fadeInBody {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes slideUp {
   from {
     opacity: 0;
