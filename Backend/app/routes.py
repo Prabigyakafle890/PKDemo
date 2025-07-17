@@ -1,12 +1,13 @@
 from flask import Blueprint, request, jsonify, session, render_template
 from app.chatbot import get_response
+
 from app.auth import check_user_type
 
 chatbot_bp = Blueprint('chatbot_bp', __name__)
 
 @chatbot_bp.route("/")
 def home():
-    return render_template("index.html")  # main landing page
+    return render_template("index.html")
 
 @chatbot_bp.route("/guest")
 def guest():
@@ -24,27 +25,14 @@ def login():
     session["user_type"] = user_type
     return jsonify({"status": "success", "user_type": user_type})
 
-# @chatbot_bp.route('/chat', methods=['POST'])
-# def chat():
-#     data = request.get_json()
-#     user_input = data.get("message", "")
-#     user_type = session.get("user_type", "guest")
-#     response = get_response(user_input, user_type)
-#     return jsonify({"response": response})
+# ✅ merged route from chatbot_routes
 @chatbot_bp.route('/chat', methods=['POST'])
 def chat():
-    try:
-        data = request.get_json()
-        print("📩 Received:", data)
+    data = request.get_json()
+    user_msg = data.get('message', '')
+    email = data.get('email', '')
+    department = data.get('department', None)
 
-        user_input = data.get("message", "")
-        user_type = session.get("user_type", "guest")
-
-        response = get_response(user_input, user_type)
-        print("💬 Responding with:", response)
-
-        return jsonify({ "response": response })
-
-    except Exception as e:
-        print("❌ Error:", e)
-        return jsonify({ "error": "Internal server error", "details": str(e) }), 500
+    user_type = 'student' if email.endswith('@padmakanya.edu.np') else 'general'
+    response = get_response(user_msg, user_type, department)
+    return jsonify({'response': response})
